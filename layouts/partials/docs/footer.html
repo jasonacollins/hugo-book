@@ -3,6 +3,8 @@
   {{ partial "docs/languages" . }}
 {{ end }}
 
+{{ if .Params.math }}{{ partial "math.html" . }}{{ end }}
+
 {{ if and .GitInfo .Site.Params.BookRepo }}
   <div>
     {{- $date := partial "docs/date" (dict "Date" .GitInfo.AuthorDate.Local "Format" .Site.Params.BookDateFormat) -}}
@@ -15,7 +17,7 @@
 
 {{ if and .File .Site.Params.BookRepo .Site.Params.BookEditPath }}
   <div>
-    <a class="flex align-center" href="{{ .Site.Params.BookRepo }}/{{ .Site.Params.BookEditPath }}/{{ .Site.Params.contentDir | default "content" }}/{{ replace .File.Path "\\" "/" }}" target="_blank" rel="noopener">
+    <a class="flex align-center" href="{{ .Site.Params.BookRepo }}/{{ .Site.Params.BookEditPath }}/{{ .Site.Params.contentDir }}/{{ replace .File.Path "\\" "/" }}" target="_blank" rel="noopener">
       <img src="{{ "svg/edit.svg" | relURL }}" class="book-icon" alt="Edit" />
       <span>{{ i18n "Edit this page" }}</span>
     </a>
